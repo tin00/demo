@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { ServiceService } from "src/app/services/service.service";
+import { NguoidungService } from '../services/nguoidung.service';
 
 @Component({
   selector: "app-trangdangnhap",
@@ -9,7 +9,7 @@ import { ServiceService } from "src/app/services/service.service";
 })
 export class TrangdangnhapComponent implements OnInit {
   userKhongHopLe: any[] = ["user01", "user02"];
-  constructor(private nguoiDungSV: ServiceService) {}
+  constructor(private nguoiDungSV: NguoidungService) {}
   formDangNhap: FormGroup;
   DangNhap() {
     // console.log(this.formDangNhap.value);

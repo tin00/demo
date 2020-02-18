@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient,HttpHeaders} from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { NguoiDung, dangNhap } from '../models/nguoidung';
-
+import { NguoiDung, dangNhap } from 'src/app/models/nguoidung';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceService {
+export class NguoidungService {
 
   constructor(private _http:HttpClient) { }
   layDanhSachNguoiDung():Observable<any>{
@@ -16,7 +15,7 @@ export class ServiceService {
     return observ;
   }
   dangKyNguoiDung(nguoiDung:NguoiDung):Observable<any>{
-    let url="http://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy";
+    let url="http://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy"
     let header=new HttpHeaders();
     header.append('Content-Type','application/json;charset=UTF-8');
     let observ=this._http.post(url,nguoiDung);

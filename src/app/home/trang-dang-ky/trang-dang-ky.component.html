@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-5 mx-auto">
-            <form action="" #FormDangKy="ngForm" (ngSubmit)="DangKy(FormDangKy.value)">
+            <form action="" #FormDangKy="ngForm" (ngSubmit)="DangKy(FormDangKy.value,FormDangKy.invalid)">
                 <h1 class="display-4">Đăng ký</h1>
                 <div class="form-group">
                     <p>Tài Khoản</p>
@@ -24,9 +24,7 @@
                 </div>
                 <div class="form-group">
                     <p>Họ Tên</p>
-                    <input type="text" required #errTen="ngModel" [pattern]='"^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
-                    "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
-                    "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$"' class="form-control" name="hoTen" ngModel>
+                    <input type="text" required #errTen="ngModel" pattern={{tiengViet}} class="form-control" name="hoTen" ngModel>
                     <div *ngIf="errTen.errors && (errTen.touched || errTen.dirty)">
                         <div class="alert alert-danger" *ngIf="errTen.errors.required">
                             Vui lòng không bỏ trống
@@ -44,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <p>Email</p>
-                    <input type="text" required #errEmail="ngModel" [pattern]='"^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$"' class="form-control" name="email" ngModel>
+                    <input type="text" required #errEmail="ngModel" pattern={{email}} class="form-control" name="email" ngModel>
                     <div *ngIf="errEmail.errors && (errEmail.touched || errEmail.dirty)">
                         <div class="alert alert-danger" *ngIf="errEmail.required">
                             Vui lòng không bỏ trống !
@@ -56,7 +54,7 @@
                 </div>
                 <div class="form-group">
                     <p>Số ĐT</p>
-                    <input type="text" required #errPhone='ngModel' [pattern]='"(09|03|07|08|05)+([0-9]{8})"' class="form-control" name="soDt" ngModel>
+                    <input type="text" required #errPhone='ngModel' pattern={{phone}} class="form-control" name="soDt" ngModel>
                     <div *ngIf="errPhone.errors && (errPhone.touched || errPhone.dirty)">
                         <div class="alert alert-danger" *ngIf="errPhone.errors.required">
                             Vui lòng không được bỏ trống
@@ -72,7 +70,8 @@
                     <input type="radio" required #errRadio='ngModel' ngModel name="maLoaiNguoiDung" value="QuanTri" ngModel> Admin
                 </div>
                 <div class="form-group">
-                    <button class=" btn-success" [disabled]="FormDangKy.invalid" type="submit">Đăng ký</button>
+                    <!-- [disabled]="FormDangKy.invalid" -->
+                    <button id="btn-submit" #btnInvalid class=" btn-success" type="submit">Đăng ký</button>
                 </div>
             </form>
         </div>
