@@ -1,0 +1,18 @@
+<div class="container">
+    <h1>Register form</h1>
+    <div class="form-group">
+        <p>Email:</p>
+        <input class="form-control" type="text" [(ngModel)]="eMail">
+    </div>
+    <div class="form-group">
+        <p>FullName:</p>
+        <input class="form-control" type="text" #fName><br><br>
+    </div>
+    <div class="form-group">
+
+        <button class="btn btn-success" (click)='changeFullName(fName.value)'>Submit</button>
+    </div>
+
+    <p>Email: {{eMail}} </p>
+    <p>FullName: {{fullName}}</p>
+</div>

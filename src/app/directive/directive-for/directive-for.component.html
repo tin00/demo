@@ -1,0 +1,37 @@
+<div class="container">
+    <h1 class="text-success" appHightDirective>Danh Sách Sinh Viên</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>MSSV</th>
+                <th>Họ Tên</th>
+                <th>Tuổi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sv of danhSachSinhVien">
+                <td>{{sv.MSSV}}</td>
+                <td>{{sv.hoTen}}</td>
+                <td>{{sv.tuoi}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <h1 class="text-success" appHightDirective>Thêm Sinh Viên</h1>
+    <div class="form-group">
+        <span>MSSV: </span>
+        <input #mssv type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <span>Họ tên: </span>
+        <input #hoTen type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <span>Tuổi: </span>
+        <input #old type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <button appBetterDirective class="btn btn-success" (click)="btnThemSinhVien(mssv.value,hoTen.value,old.value)">Thêm sinh viên</button>
+    </div>
+</div>

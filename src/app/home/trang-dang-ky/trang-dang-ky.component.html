@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="row">
+        <div class="col-5 mx-auto">
+            <form action="" #FormDangKy="ngForm" (ngSubmit)="DangKy(FormDangKy.value)">
+                <h1 class="display-4">Đăng ký</h1>
+                <div class="form-group">
+                    <p>Tài Khoản</p>
+                    <input type="text" #errtaikhoan='ngModel' required class="form-control" name="taiKhoan" ngModel>
+                    <!-- touched: trường này đã được chạm vào -- dirty: Trường này đã được thay đổi -->
+                    <div *ngIf="errtaikhoan.errors && (errtaikhoan.touched || errtaikhoan.dirty)">
+                        <div class="alert alert-danger" *ngIf="errtaikhoan.errors.required">
+                            Vui lòng không bỏ trống
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>Mật Khẩu</p>
+                    <input type="text" #errmatKhau="ngModel" required maxlength="20" minlength="7" class="form-control" name="matKhau" ngModel>
+                    <div *ngIf="errmatKhau.errors && (errmatKhau.touched || errmatKhau.dirty)">
+                        <div class="alter alert-danger" *ngIf="errmatKhau.errors.minlength || errorsmatKhau.errors.maxlength">
+                            Mật khẩu có độ dài từ 7 - 20 ký tự
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>Họ Tên</p>
+                    <input type="text" required #errTen="ngModel" [pattern]='"^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
+                    "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
+                    "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$"' class="form-control" name="hoTen" ngModel>
+                    <div *ngIf="errTen.errors && (errTen.touched || errTen.dirty)">
+                        <div class="alert alert-danger" *ngIf="errTen.errors.required">
+                            Vui lòng không bỏ trống
+                        </div>
+                        <div class="alert alert-danger" *ngIf="errTen.errors.pattern">
+                            Vui lòng chỉ viết chữ có dấu or không dấu. Không được điền ký tự
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>Mã Nhóm</p>
+                    <select name="maNhom" class="form-control" ngModel>
+                        <option *ngFor="let item of mangNhom" >{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <p>Email</p>
+                    <input type="text" required #errEmail="ngModel" [pattern]='"^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$"' class="form-control" name="email" ngModel>
+                    <div *ngIf="errEmail.errors && (errEmail.touched || errEmail.dirty)">
+                        <div class="alert alert-danger" *ngIf="errEmail.required">
+                            Vui lòng không bỏ trống !
+                        </div>
+                        <div class="alert alert-danger" *ngIf="errEmail.errors.pattern">
+                            Vui lòng nhập đúng cấu trúc [6 ký tự trở lên]@gmail.com
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>Số ĐT</p>
+                    <input type="text" required #errPhone='ngModel' [pattern]='"(09|03|07|08|05)+([0-9]{8})"' class="form-control" name="soDt" ngModel>
+                    <div *ngIf="errPhone.errors && (errPhone.touched || errPhone.dirty)">
+                        <div class="alert alert-danger" *ngIf="errPhone.errors.required">
+                            Vui lòng không được bỏ trống
+                        </div>
+                        <div *ngIf="(errPhone.errors.pattern)" class="alert alert-danger">
+                            Vui lòng nhập đúng các đầu số [09,03,07,08,05] và không quá 10 số
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Loại Người Dùng:&nbsp;&nbsp;</label>
+                    <input type="radio" required #errRadio='ngModel' ngModel name="maLoaiNguoiDung" value="KhachHang" ngModel> Khách Hàng
+                    <input type="radio" required #errRadio='ngModel' ngModel name="maLoaiNguoiDung" value="QuanTri" ngModel> Admin
+                </div>
+                <div class="form-group">
+                    <button class=" btn-success" [disabled]="FormDangKy.invalid" type="submit">Đăng ký</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tài Khoản</th>
+                <th>Mật Khẩu</th>
+                <th>Họ tên</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Ngày Sinh</th>
+                <th>Mã loại người dùng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dsND of mangDanhSachNguoiDung">
+                <td>{{dsND.taiKhoan}}</td>
+                <td>{{dsND.matKhau}}</td>
+                <td>{{dsND.hoTen }}</td>
+                <td>{{dsND.email}}</td>
+                <td>{{dsND.soDt}}</td>
+                <td>{{date | date:'dd/MM/yyyy'}}</td>
+                <td>{{dsND.maLoaiNguoiDung}}</td>
+                <td>
+                    <button #btnChinhSua class="btn btn-success" [attr.data-taiKhoan]="dsND.taiKhoan" [attr.data-matKhau]='dsND.matKhau' [attr.data-hoTen]='dsND.hoTen' [attr.data-email]='dsND.email' [attr.data-soDT]="dsND.soDT" [attr.data-loaiNguoiDung]="dsND.loaiNguoiDung"
+                        (click)="ChinhSua(btnChinhSua)">Chỉnh sửa</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
